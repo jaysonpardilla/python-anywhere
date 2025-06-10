@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import QuizAPIView, AllVideosAPIView, SingleVideoAPIView, AllCategoriesAPIView
+from .views import QuizAPIView, AllVideosAPIView, SingleVideoAPIView, AllCategoriesAPIView, VideosByCategoryAPIView
 
 urlpatterns = [
     path('quiz/', QuizAPIView.as_view(), name='quiz'),
