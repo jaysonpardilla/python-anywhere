@@ -26,8 +26,14 @@ class SingleVideoAPIView(RetrieveAPIView):
     serializer_class = VideoSerializer
     lookup_field = 'id'
 
+class VideosByCategoryAPIView(APIView):
+    def get(self, request):
+        category_id = request.query_params.get('category_id')
+        if category_id:
+            videos = Video.objects.filter(category__id=category_id)
+        else:
+            videos = Video.objects.all().order_by('?')  # return random if no category selected
+        serializer = VideoSerializer(videos, many=True)
+        return Response(serializer.data)
 
-class AllCategoriesAPIView(ListAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
 
